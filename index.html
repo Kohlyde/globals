@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Sample Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.8.55/css/materialdesignicons.min.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css" id="highlight-style">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- Material Design Components -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/12.0.0/material-components-web.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --timberwolf: #d7d7d7ff;
+            --timberwolf-2: #e9ded8ff;
+            --isabelline: #f1e7e4ff;
+            --white: #ffffffff;
+            --citron: #c4b966ff;
+            --jet: #2f2e2eff;
+            --garnet: #683030ff;
+            --eerie-black: #1e1e1eff;
+            --black: #000000ff;
+            --raisin-black: #181a23ff;
+            --bone: #ddd4c5ff;
+--white: #ffffffff;
+--antique-white: #ffeedbff;
+--beige: #e2e8d2ff;
+--raisin-black: #32313cff;
+--van-dyke: #3c3131ff;
+--eerie-black: #222222ff;
+--cardinal: #ba3b46ff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: 'Rubik', sans-serif;
+            background-color: var(--eerie-black);
+            /* background-color: #121212; */
+            color: #ffffff;
+            /* font-family: 'Rubik', sans-serif; */
+        }
+        .navbar-bg {
+            background-color: var(--van-dyke);
+            transition: height 0.3s ease, box-shadow 0.3s ease;
+            height: 70px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+        }
+        .navbar-nav .nav-link, .navbar-brand {
+            color: var(--timberwolf) !important;
+            text-decoration: none;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #007bff !important;
+        }
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .social-icons a {
+            color: var(--timberwolf) !important;
+            font-size: 1.2em;
+        }
+        .social-icons a:hover {
+            color: #007bff !important;
+        }
+        .navbar-brand {
+            margin-right: auto; /* Left justify */
+            display: flex;
+            align-items: center;
+        }
+        .navbar-nav {
+            margin-left: auto; /* Right justify */
+        }
+        .navbar-nav .nav-item {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-toggler {
+            margin-left: 10px;
+        }
+        .navbar-toggler-icon {
+            margin-left: 10px;
+        }
+        #darkModeToggle {
+            margin-left: 10px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+        }
+        body {
+
+        }
+        .code-window {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            padding: 10px;
+            overflow: auto;
+            font-family: 'Source Code Pro', monospace;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        h2 {
+            font-family: 'Rubik', sans-serif;
+        }
+        .description {
+            font-family: 'IBM Plex Sans', sans-serif;
+            margin-bottom: 10px;
+        }
+        select {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border: 1px solid #333;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .tooltip {
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .sample-code {
+            margin-top: 20px;
+        }
+        .code-sample {
+            background-color: #1e1e1e;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-bg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">KOHLYDE</a>
+            <i class="fas fa-record-vinyl ms-2"></i> <!-- Added vinyl icon -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-soundcloud"></i></a>
+                            <a href="#"><i class="fab fa-codepen"></i></a>
+                            <a href="#"><i class="fas fa-record-vinyl"></i></a>
+                            <a href="#"><i class="fas fa-phone"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <button id="darkModeToggle" class="btn btn-secondary">Toggle Dark Mode</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Dependencies</h1>
+        <label for="style-select">Choose a Highlight.js style:</label>
+        <select id="style-select" class="form-control">
+            <!-- Dark Styles -->
+            <optgroup label="Dark Styles">
+                <option value="a11y-dark">A11y Dark</option>
+                <option value="an-old-hope">An Old Hope</option>
+                <option value="androidstudio">Android Studio</option>
+                <option value="atom-one-dark">Atom One Dark</option>
+                <option value="codepen-embed">Codepen Embed</option>
+                <option value="darcula">Darcula</option>
+                <option value="dracula">Dracula</option>
+                <option value="duotone-dark">Duotone Dark</option>
+                <option value="gruvbox-dark">Gruvbox Dark</option>
+                <option value="hopscotch">Hopscotch</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="monokai">Monokai</option>
+                <option value="monokai-sublime">Monokai Sublime</option>
+                <option value="night-owl">Night Owl</option>
+                <option value="obsidian">Obsidian</option>
+                <option value="ocean">Ocean</option>
+                <option value="paraiso-dark">Paraiso Dark</option>
+                <option value="solarized-dark">Solarized Dark</option>
+                <option value="tomorrow-night">Tomorrow Night</option>
+                <option value="vs2015">VS2015</option>
+                <option value="xt256">XT256</option>
+            </optgroup>
+            <!-- Light Styles -->
+            <optgroup label="Light Styles">
+                <option value="a11y-light">A11y Light</option>
+                <option value="arduino-light">Arduino Light</option>
+                <option value="ascetic">Ascetic</option>
+                <option value="atom-one-light">Atom One Light</option>
+                <option value="codepen-embed-light">Codepen Embed Light</option>
+                <option value="color-brewer">Color Brewer</option>
+                <option value="docco">Docco</option>
+                <option value="github">GitHub</option>
+                <option value="googlecode">Googlecode</option>
+                <option value="gruvbox-light">Gruvbox Light</option>
+                <option value="idea">IDEA</option>
+                <option value="isbl-editor-light">ISBL Editor Light</option>
+                <option value="kimbie-light">Kimbie Light</option>
+                <option value="magula">Magula</option>
+                <option value="mono-blue">Mono Blue</option>
+                <option value="nnfx">NNFX</option>
+                <option value="paraiso-light">Paraiso Light</option>
+                <option value="pojoaque">Pojoaque</option>
+                <option value="qtcreator-light">QtCreator Light</option>
+                <option value="solarized-light">Solarized Light</option>
+                <option value="tomorrow">Tomorrow</option>
+                <option value="vs">VS</option>
+                <option value="xcode">Xcode</option>
+                <option value="zenburn">Zenburn</option>
+            </optgroup>
+        </select>
+
+        <pre class="sample-code">
+            <code class="javascript">
+            // Sample code for syntax highlighting
+            function helloWorld() {
+                console.log('Hello, world!');
+            }
+            </code>
+        </pre>
+
+        <h2>Fonts</h2>
+        <div class="description">
+            A collection of fonts from Google Fonts and IBM Plex.
+        </div>
+        <div class="code-window">
+            <button class="copy-button" onclick="copyToClipboard('fonts-code')">Copy</button>
+            <div class="tooltip" id="tooltip-fonts">Copied!</div>
+<pre id="fonts-code"><code class="html">
+&lt;link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;300;400;500;600;700;900&amp;display=swap" rel="stylesheet"&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap" rel="stylesheet"&gt;
+&lt;link href="https://cdnjs.cloudflare.com/ajax/libs/ibm-plex/6.0.2/css/ibm-plex.min.css" rel="stylesheet"&gt;
+</code></pre>
+        </div>
+
+        <h2>Icons</h2>
+        <div class="description">
+            Icon libraries including Font Awesome and Material Design Icons.
+        </div>
+        <div class="code-window">
+            <button class="copy-button" onclick="copyToClipboard('icons-code')">Copy</button>
+            <div class="tooltip" id="tooltip-icons">Copied!</div>
+<pre id="icons-code"><code class="html">
+&lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"&gt;
+&lt;link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.8.55/css/materialdesignicons.min.css" rel="stylesheet"&gt;
+</code></pre>
+        </div>
+
+        <h2>Bootstrap</h2>
+        <div class="description">
+            Bootstrap CSS and JS for responsive design, developed by Twitter.
+        </div>
+        <div class="code-window">
+            <button class="copy-button" onclick="copyToClipboard('bootstrap-code')">Copy</button>
+            <div class="tooltip" id="tooltip-bootstrap">Copied!</div>
+<pre id="bootstrap-code"><code class="html">
+&lt;link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"&gt;
+</code></pre>
+        </div>
+
+        <h2>Highlight.js</h2>
+        <div class="description">
+            Highlight.js for syntax highlighting in code blocks, developed by Ivan Sagalaev.
+        </div>
+        <div class="code-window">
+            <button class="copy-button" onclick="copyToClipboard('highlightjs-code')">Copy</button>
+            <div class="tooltip" id="tooltip-highlightjs">Copied!</div>
+<pre id="highlightjs-code"><code class="html">
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css" id="highlight-style"&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"&gt;&lt;/script&gt;
+</code></pre>
+        </div>
+
+        <h2>Animate.css</h2>
+        <div class="description">
+            Animate.css for CSS animations, developed by Daniel Eden.
+        </div>
+        <div class="code-window">
+            <button class="copy-button" onclick="copyToClipboard('animatecss-code')">Copy</button>
+            <div class="tooltip" id="tooltip-animatecss">Copied!</div>
+<pre id="animatecss-code"><code class="html">
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/&gt;
+</code></pre>
+        </div>
+
+        <h2>Anime.js</h2>
+        <div class="description">
+            Anime.js for JavaScript animations, developed by Julian Garnier.
+        </div>
+        <div class="code-window">
+            <button class="copy-button" onclick="copyToClipboard('animejs-code')">Copy</button>
+            <div class="tooltip" id="tooltip-animejs">Copied!</div>
+<pre id="animejs-code"><code class="html">
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"&gt;&lt;/script&gt;
+</code></pre>
+        </div>
+
+        <h2>Highcharts</h2>
+        <div class="description">
+            Highcharts for interactive charts, developed by Highsoft.
+        </div>
+        <div class="code-window">
+            <button class="copy-button" onclick="copyToClipboard('highcharts-code')">Copy</button>
+            <div class="tooltip" id="tooltip-highcharts">Copied!</div>
+<pre id="highcharts-code"><code class="html">
+&lt;script src="https://code.highcharts.com/highcharts.js"&gt;&lt;/script&gt;
+&lt;script src="https://code.highcharts.com/modules/exporting.js"&gt;&lt;/script&gt;
+&lt;script src="https://code.highcharts.com/modules/export-data.js"&gt;&lt;/script&gt;
+&lt;script src="https://code.highcharts.com/modules/accessibility.js"&gt;&lt;/script&gt;
+</code></pre>
+        </div>
+
+        <h2>amCharts</h2>
+        <div class="description">
+            amCharts for advanced charts and maps, developed by amCharts.
+        </div>
+        <div class="code-window">
+            <button class="copy-button" onclick="copyToClipboard('amcharts-code')">Copy</button>
+            <div class="tooltip" id="tooltip-amcharts">Copied!</div>
+<pre id="amcharts-code"><code class="html">
+&lt;script src="https://cdn.amcharts.com/lib/5/index.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.amcharts.com/lib/5/xy.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"&gt;&lt;/script&gt;
+</code></pre>
+        </div>
+
+        <h2>Material Design Components</h2>
+        <div class="description">
+            Material Design Components for UI, developed by Google.
+        </div>
+        <div class="code-window">
+            <button class="copy-button" onclick="copyToClipboard('materialdesign-code')">Copy</button>
+            <div class="tooltip" id="tooltip-materialdesign">Copied!</div>
+<pre id="materialdesign-code"><code class="html">
+&lt;link href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/12.0.0/material-components-web.min.css" rel="stylesheet"&gt;
+</code></pre>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const styles = {
+            "a11y-dark": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/a11y-dark.min.css",
+            "an-old-hope": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/an-old-hope.min.css",
+            "androidstudio": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/androidstudio.min.css",
+            "atom-one-dark": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-dark.min.css",
+            "codepen-embed": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/codepen-embed.min.css",
+            "darcula": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/darcula.min.css",
+            "dracula": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/dracula.min.css",
+            "duotone-dark": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/duotone-dark.min.css",
+            "gruvbox-dark": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/gruvbox-dark.min.css",
+            "hopscotch": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/hopscotch.min.css",
+            "hybrid": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/hybrid.min.css",
+            "monokai": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/monokai.min.css",
+            "monokai-sublime": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/monokai-sublime.min.css",
+            "night-owl": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/night-owl.min.css",
+            "obsidian": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/obsidian.min.css",
+            "ocean": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/ocean.min.css",
+            "paraiso-dark": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/paraiso-dark.min.css",
+            "solarized-dark": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/solarized-dark.min.css",
+            "tomorrow-night": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/tomorrow-night.min.css",
+            "vs2015": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/vs2015.min.css",
+            "xt256": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/xt256.min.css",
+            "a11y-light": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/a11y-light.min.css",
+            "arduino-light": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/arduino-light.min.css",
+            "ascetic": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/ascetic.min.css",
+            "atom-one-light": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-light.min.css",
+            "codepen-embed-light": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/codepen-embed-light.min.css",
+            "color-brewer": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/color-brewer.min.css",
+            "docco": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/docco.min.css",
+            "github": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/github.min.css",
+            "googlecode": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/googlecode.min.css",
+            "gruvbox-light": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/gruvbox-light.min.css",
+            "idea": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/idea.min.css",
+            "isbl-editor-light": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/isbl-editor-light.min.css",
+            "kimbie-light": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/kimbie-light.min.css",
+            "magula": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/magula.min.css",
+            "mono-blue": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/mono-blue.min.css",
+            "nnfx": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/nnfx.min.css",
+            "paraiso-light": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/paraiso-light.min.css",
+            "pojoaque": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/pojoaque.min.css",
+            "qtcreator-light": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/qtcreator-light.min.css",
+            "solarized-light": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/solarized-light.min.css",
+            "tomorrow": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/tomorrow.min.css",
+            "vs": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/vs.min.css",
+            "xcode": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/xcode.min.css",
+            "zenburn": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/zenburn.min.css"
+        };
+
+        $(document).ready(function() {
+            $('#style-select').on('change', function() {
+                var style = this.value;
+                var link = $('#highlight-style');
+                link.attr('href', styles[style]);
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+            });
+            // Set default style to dark
+            $('#style-select').val('atom-one-dark').change();
+        });
+
+        function copyToClipboard(id) {
+            var copyText = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(copyText).then(function() {
+                var tooltip = document.getElementById('tooltip-' + id.split('-')[0]);
+                tooltip.style.display = 'block';
+                setTimeout(function() {
+                    tooltip.style.display = 'none';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
